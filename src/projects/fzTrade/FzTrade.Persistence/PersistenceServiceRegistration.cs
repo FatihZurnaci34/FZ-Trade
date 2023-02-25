@@ -21,7 +21,7 @@ namespace FzTrade.Persistence
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
             services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
-            services.AddScoped<ISupplierRepository, SupplierRepository>();
+
 
             return services;
         }
