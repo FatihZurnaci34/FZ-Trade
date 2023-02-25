@@ -24,7 +24,7 @@ namespace FzTrade.WebAPI.Controllers
             SetRefreshTokenToCookie(result.RefreshToken);
             return Created("", result.AccessToken);
         }
-
+        
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
@@ -38,7 +38,6 @@ namespace FzTrade.WebAPI.Controllers
             SetRefreshTokenToCookie(result.RefreshToken);
             return Created("", result.AccessToken);
         }
-
 
         private void SetRefreshTokenToCookie(RefreshToken refreshToken)
         {
