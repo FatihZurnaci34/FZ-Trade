@@ -1,9 +1,11 @@
 ﻿using Core.Security.Entities;
+using FzTrade.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +19,9 @@ namespace FzTrade.Persistence.Contexts
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Subcategory> Subcategories { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
@@ -89,6 +94,36 @@ namespace FzTrade.Persistence.Contexts
                 a.Property(p => p.ReplacedByToken).HasColumnName("ReplacedByToken");
                 a.Property(p => p.ReasonRevoked).HasColumnName("ReasonRevoked");
                 a.HasOne(p => p.User);
+            });
+
+            modelBuilder.Entity<Category>(a =>
+            {
+                a.ToTable("Categories").HasKey(k => k.Id);
+                a.Property(p=>p.Id).HasColumnName("Id");
+                a.Property(p => p.Name).HasColumnName("Name");
+                a.HasMany(p => p.Subcategories);
+            });
+
+            modelBuilder.Entity<Subcategory>(a =>
+            {
+                a.ToTable("Subcategories").HasKey(k => k.Id);
+                a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.CategoryId).HasColumnName("CategoryId");
+                a.Property(p => p.Name).HasColumnName("Name");
+                a.HasOne(p => p.Category);
+                a.HasMany(p => p.Products);
+            });
+
+            modelBuilder.Entity<Product>(a =>
+            {
+                a.ToTable("Products").HasKey(k => k.Id);
+                a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.SubcategoryId).HasColumnName("SubcategoryId");
+                a.Property(p => p.Size).HasColumnName("Size");
+                a.Property(p => p.Price).HasColumnName("Price");
+                a.Property(p => p.Description).HasColumnName("Description");
+                a.Property(p => p.Stock).HasColumnName("Stock");
+                a.HasOne(p => p.Subcategory);
             });
 
             OperationClaim[] operationClaimSeeds = { new(1, "User"), new(2, "Admin") };

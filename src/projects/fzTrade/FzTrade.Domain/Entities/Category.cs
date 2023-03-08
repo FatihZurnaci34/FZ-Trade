@@ -5,22 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace FzTrade.Domain.Entities
 {
-    public class Brand:Entity
+    public class Category:Entity
     {
         public string Name { get; set; }
-
-        public virtual ICollection<Model> Models { get; set; }
-
-        public Brand()
+        public ICollection<Subcategory> Subcategories { get; set; }
+        public Category()
         {
+            
         }
 
-        public Brand(int id, string name):this()
+        public Category(int id, string name) : this()
         {
             Id = id;
-            Name = name;
+            Name=name;
+
         }
     }
 }

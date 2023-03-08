@@ -15,6 +15,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\corePackages\Core.Security\Core.Security.csproj" />
 	  <ProjectReference Include="..\FzTrade.Application\FzTrade.Application.csproj" />
+	  <ProjectReference Include="..\FzTrade.Domain\FzTrade.Domain.csproj" />
 	</ItemGroup>
 
 </Project>
