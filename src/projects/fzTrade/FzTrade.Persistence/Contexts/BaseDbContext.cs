@@ -22,6 +22,8 @@ namespace FzTrade.Persistence.Contexts
         public DbSet<Category> Categories { get; set; }
         public DbSet<Subcategory> Subcategories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
@@ -49,6 +51,22 @@ namespace FzTrade.Persistence.Contexts
                 a.Property(p => p.Status).HasColumnName("Status");
                 a.HasMany(p => p.UserOperationClaims);
                 a.HasMany(p => p.RefreshTokens);
+            });
+            modelBuilder.Entity<Customer>(a =>
+            {
+                a.ToTable("Customers");
+                a.Property(p => p.Balance).HasColumnName("Balance");
+                a.Property(p => p.Gender).HasColumnName("Gender");
+                a.Property(p => p.Address).HasColumnName("Address");
+                
+            });
+            modelBuilder.Entity<Supplier>(a =>
+            {
+                a.ToTable("Suppliers");
+                a.Property(p => p.CompanyName).HasColumnName("Balance");
+                a.Property(p => p.Location).HasColumnName("Location");
+                a.Property(p => p.NumberOfProducts).HasColumnName("NumberOfProducts");
+
             });
 
             modelBuilder.Entity<OperationClaim>(a =>

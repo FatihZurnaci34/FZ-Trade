@@ -24,7 +24,33 @@ namespace FzTrade.WebAPI.Controllers
             SetRefreshTokenToCookie(result.RefreshToken);
             return Created("", result.AccessToken);
         }
-        
+
+        [HttpPost("RegisterForCustomer")]
+        public async Task<IActionResult> RegisterForCustomer([FromBody] CustomerForRegister customerForRegister)
+        {
+            CustomerRegisterCommand customerRegisterCommand = new()
+            {
+                CustomerForRegister = customerForRegister,
+                IpAddress = GetIpAddress()
+            };
+            RegisteredDto result = await Mediator.Send(customerRegisterCommand);
+            SetRefreshTokenToCookie(result.RefreshToken);
+            return Created("", result.AccessToken);
+        }
+
+        [HttpPost("RegisterForSupplier")]
+        public async Task<IActionResult> RegisterForSupplier([FromBody] SupplierForRegister supplierForRegister)
+        {
+            SupplierRegisterCommand supplierRegisterCommand = new()
+            {
+                SupplierForRegister = supplierForRegister,
+                IpAddress = GetIpAddress()
+            };
+            RegisteredDto result = await Mediator.Send(supplierRegisterCommand);
+            SetRefreshTokenToCookie(result.RefreshToken);
+            return Created("", result.AccessToken);
+        }
+
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {

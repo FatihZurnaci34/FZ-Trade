@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FzTrade.Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20230226192548_firstmigration")]
-    partial class firstmigration
+    [Migration("20230308192523_createdatabase")]
+    partial class createdatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -266,6 +266,46 @@ namespace FzTrade.Persistence.Migrations
                     b.ToTable("Subcategories", (string)null);
                 });
 
+            modelBuilder.Entity("FzTrade.Domain.Entities.Customer", b =>
+                {
+                    b.HasBaseType("Core.Security.Entities.User");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Address");
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Balance");
+
+                    b.Property<bool>("Gender")
+                        .HasColumnType("bit")
+                        .HasColumnName("Gender");
+
+                    b.ToTable("Customers", (string)null);
+                });
+
+            modelBuilder.Entity("FzTrade.Domain.Entities.Supplier", b =>
+                {
+                    b.HasBaseType("Core.Security.Entities.User");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Balance");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Location");
+
+                    b.Property<int>("NumberOfProducts")
+                        .HasColumnType("int")
+                        .HasColumnName("NumberOfProducts");
+
+                    b.ToTable("Suppliers", (string)null);
+                });
+
             modelBuilder.Entity("Core.Security.Entities.RefreshToken", b =>
                 {
                     b.HasOne("Core.Security.Entities.User", "User")
@@ -316,6 +356,24 @@ namespace FzTrade.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("FzTrade.Domain.Entities.Customer", b =>
+                {
+                    b.HasOne("Core.Security.Entities.User", null)
+                        .WithOne()
+                        .HasForeignKey("FzTrade.Domain.Entities.Customer", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FzTrade.Domain.Entities.Supplier", b =>
+                {
+                    b.HasOne("Core.Security.Entities.User", null)
+                        .WithOne()
+                        .HasForeignKey("FzTrade.Domain.Entities.Supplier", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Security.Entities.User", b =>
