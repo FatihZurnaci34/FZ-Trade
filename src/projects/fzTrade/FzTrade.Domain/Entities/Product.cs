@@ -10,6 +10,7 @@ namespace FzTrade.Domain.Entities
 {
     public class Product:Entity
     {
+        public int SupplierId { get; set; }
         public int SubcategoryId { get; set; }
         public string Name { get; set; }
         public string Size { get; set; }
@@ -18,6 +19,8 @@ namespace FzTrade.Domain.Entities
         public int Stock { get; set;}
 
         public virtual Subcategory Subcategory { get; set; }
+        public virtual Supplier Supplier { get; set; }
+
         public Product()
         {
             
@@ -27,6 +30,7 @@ namespace FzTrade.Domain.Entities
                        string size,decimal price,string description,int stock ):this()
         {
             Id = id;
+            SupplierId = supplierId;
             SubcategoryId = subcategoryId;
             Name = name;
             Size = size;

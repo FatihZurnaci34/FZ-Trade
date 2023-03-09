@@ -2,6 +2,7 @@
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using FzTrade.Application.Features.Auths.Rules;
+using FzTrade.Application.Features.Categories.Rules;
 using FzTrade.Application.Services.AuthService;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,7 @@ namespace FzTrade.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<AuthBusinessRules>();
+            services.AddScoped<CategoryBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));

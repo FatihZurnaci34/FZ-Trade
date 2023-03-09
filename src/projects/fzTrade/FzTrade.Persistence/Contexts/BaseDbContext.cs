@@ -66,6 +66,7 @@ namespace FzTrade.Persistence.Contexts
                 a.Property(p => p.CompanyName).HasColumnName("Balance");
                 a.Property(p => p.Location).HasColumnName("Location");
                 a.Property(p => p.NumberOfProducts).HasColumnName("NumberOfProducts");
+                a.HasMany(p => p.Products);
 
             });
 
@@ -136,12 +137,14 @@ namespace FzTrade.Persistence.Contexts
             {
                 a.ToTable("Products").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.SupplierId).HasColumnName("SupplierId");
                 a.Property(p => p.SubcategoryId).HasColumnName("SubcategoryId");
                 a.Property(p => p.Size).HasColumnName("Size");
                 a.Property(p => p.Price).HasColumnName("Price");
                 a.Property(p => p.Description).HasColumnName("Description");
                 a.Property(p => p.Stock).HasColumnName("Stock");
                 a.HasOne(p => p.Subcategory);
+                a.HasOne(p => p.Supplier);
             });
 
             OperationClaim[] operationClaimSeeds = { new(1, "User"), new(2, "Admin") };

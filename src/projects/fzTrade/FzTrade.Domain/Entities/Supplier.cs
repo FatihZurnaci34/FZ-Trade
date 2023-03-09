@@ -14,6 +14,8 @@ namespace FzTrade.Domain.Entities
         public string Location { get; set; }
         public int NumberOfProducts { get; set; }
 
+        public ICollection<Product> Products { get; set; }
+
         public Supplier()
         {
             
