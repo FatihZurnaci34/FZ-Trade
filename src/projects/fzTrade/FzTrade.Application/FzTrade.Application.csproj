@@ -19,4 +19,8 @@
 	  <ProjectReference Include="..\FzTrade.Domain\FzTrade.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Features\Subcategories\Commands\UpdateSubcategory\" />
+	</ItemGroup>
+
 </Project>

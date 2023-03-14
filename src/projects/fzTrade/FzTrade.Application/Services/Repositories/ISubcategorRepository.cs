@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FzTrade.Application.Services.Repositories
 {
-    public interface ISubcategory:IAsyncRepository<Subcategory>,IRepository<Subcategory>
+    public interface ISubcategorRepository:IAsyncRepository<Subcategory>,IRepository<Subcategory>
     {
     }
 }

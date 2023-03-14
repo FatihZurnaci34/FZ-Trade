@@ -22,7 +22,7 @@ namespace FzTrade.Persistence
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ISupplierRepository, SupplierRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<ISubcategory, SubcategoryRepository>();
+            services.AddScoped<ISubcategorRepository, SubcategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
             return services;

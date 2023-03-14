@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FzTrade.Persistence.Repositories
 {
-    public class SubcategoryRepository : EfRepositoryBase<Subcategory, BaseDbContext>, ISubcategory
+    public class SubcategoryRepository : EfRepositoryBase<Subcategory, BaseDbContext>, ISubcategorRepository
     {
         public SubcategoryRepository(BaseDbContext context) : base(context)
         {
