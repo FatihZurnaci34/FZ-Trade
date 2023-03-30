@@ -20,6 +20,7 @@ namespace FzTrade.Domain.Entities
 
         public virtual Subcategory Subcategory { get; set; }
         public virtual Supplier Supplier { get; set; }
+        public ICollection<Order> Orders { get; set; }
 
         public Product()
         {

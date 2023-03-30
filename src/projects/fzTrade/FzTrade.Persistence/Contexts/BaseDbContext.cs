@@ -24,6 +24,7 @@ namespace FzTrade.Persistence.Contexts
         public DbSet<Product> Products { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
@@ -145,6 +146,17 @@ namespace FzTrade.Persistence.Contexts
                 a.Property(p => p.Stock).HasColumnName("Stock");
                 a.HasOne(p => p.Subcategory);
                 a.HasOne(p => p.Supplier);
+            });
+
+            modelBuilder.Entity<Order>(a =>
+            {
+                a.ToTable("Orders").HasKey(k=>k.Id);
+                a.Property(p=>p.Id).HasColumnName("Id");
+                a.Property(p => p.CustomerId).HasColumnName("CustomerId");
+                a.Property(p => p.ProductId).HasColumnName("ProductId");
+                a.Property(p => p.OrderDate).HasColumnName("OrderDate");
+                a.HasMany(p => p.Products);
+                a.HasOne(p => p.Customer);
             });
 
             OperationClaim[] operationClaimSeeds = { new(1, "User"), new(2, "Admin") };

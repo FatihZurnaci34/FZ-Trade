@@ -20,6 +20,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Features\Orders\Commands\" />
+	  <Folder Include="Features\Orders\Models\" />
+	  <Folder Include="Features\Orders\Rules\" />
+	  <Folder Include="Features\Orders\Queries\" />
+	  <Folder Include="Features\Orders\Profiles\" />
 	  <Folder Include="Features\Subcategories\Commands\UpdateSubcategory\" />
 	</ItemGroup>
 
